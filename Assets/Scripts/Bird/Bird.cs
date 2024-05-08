@@ -16,6 +16,28 @@ public class Bird : MonoBehaviour
         _collisionHandler = GetComponent<BirdCollisionHandler>();
     }
 
+    private void OnEnable()
+    {
+        _collisionHandler.CollisionDetected += ProcessCollision;
+    }
+    
+    private void OnDisable()
+    {
+        _collisionHandler.CollisionDetected -= ProcessCollision;
+    }
+
+    private void ProcessCollision(IInteractable interactable)
+    {
+        if (interactable is Pipe)
+        {
+            GameOver?.Invoke();
+        }
+        else if (interactable is ScoringZone)
+        {
+            
+        }
+    }
+
     public void Reset()
     {
         

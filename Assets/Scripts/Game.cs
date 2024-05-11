@@ -12,22 +12,38 @@ public class Game : MonoBehaviour
     {
         _startScreen.PlayButtonClicked += OnPlayButtonClicked;
         _endScreen.RestartButtonClicked += OnRestartButtonClicked;
+        _bird.GameOver += OnGameOver;
     }
     
     private void OnDisable()
     {
         _startScreen.PlayButtonClicked -= OnPlayButtonClicked;
         _endScreen.RestartButtonClicked -= OnRestartButtonClicked;
+        _bird.GameOver -= OnGameOver;
+    }
+    
+    private void Start()
+    {
+        Time.timeScale = 0;
+        _startScreen.Open();
+    }
+    
+    private void OnGameOver()
+    {
+        Time.timeScale = 0;
+        _endScreen.Open();
     }
 
     private void OnPlayButtonClicked()
     {
+        Debug.Log("Play clicked");
         _startScreen.Close();
         StartGame();
     }
 
     private void OnRestartButtonClicked()
     {
+        Debug.Log("Restart clicked");
         _endScreen.Close();
         StartGame();
     }

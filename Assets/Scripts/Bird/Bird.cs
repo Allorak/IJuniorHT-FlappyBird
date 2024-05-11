@@ -3,10 +3,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(BirdMover))]
 [RequireComponent(typeof(BirdCollisionHandler))]
+[RequireComponent(typeof(ScoreCounter))]
 public class Bird : MonoBehaviour
 {
     private BirdMover _mover;
     private BirdCollisionHandler _collisionHandler;
+    private ScoreCounter _scoreCounter;
 
     public event Action GameOver;
 
@@ -14,6 +16,7 @@ public class Bird : MonoBehaviour
     {
         _mover = GetComponent<BirdMover>();
         _collisionHandler = GetComponent<BirdCollisionHandler>();
+        _scoreCounter = GetComponent<ScoreCounter>();
     }
 
     private void OnEnable()
@@ -28,18 +31,21 @@ public class Bird : MonoBehaviour
 
     private void ProcessCollision(IInteractable interactable)
     {
-        if (interactable is Pipe)
+        Debug.Log(interactable.GetType());
+        switch (interactable)
         {
-            GameOver?.Invoke();
-        }
-        else if (interactable is ScoringZone)
-        {
-            
+            case Pipe or Ground:
+                GameOver?.Invoke();
+                break;
+            case ScoringZone:
+                _scoreCounter.Increase();
+                break;
         }
     }
 
     public void Reset()
     {
-        
+        _scoreCounter.Reset();
+        _mover.Reset();
     }
 }

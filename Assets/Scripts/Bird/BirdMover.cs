@@ -44,6 +44,13 @@ public class BirdMover : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
     }
 
+    public void Reset()
+    {
+        transform.position = _startPosition;
+        transform.rotation = Quaternion.identity;
+        _rigidbody2D.velocity = Vector2.zero;
+    }
+
     private void Jump()
     {
         _rigidbody2D.velocity = _defaultVelocityVector;

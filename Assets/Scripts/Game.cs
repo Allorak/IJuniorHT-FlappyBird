@@ -36,14 +36,12 @@ public class Game : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        Debug.Log("Play clicked");
         _startScreen.Close();
         StartGame();
     }
 
     private void OnRestartButtonClicked()
     {
-        Debug.Log("Restart clicked");
         _endScreen.Close();
         StartGame();
     }
@@ -52,5 +50,6 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = 1;
         _bird.Reset();
+        _pipeGenerator.Reset();
     }
 }

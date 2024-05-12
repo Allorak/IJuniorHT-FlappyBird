@@ -19,10 +19,7 @@ public class PipePool : MonoBehaviour
     public Pipe GetObject()
     {
         if (_pool.Count == 0)
-        {
-            var pipe = Instantiate(_prefab, _container, true);
-            return pipe;
-        }
+            return Instantiate(_prefab, _container, true);
 
         return _pool.Dequeue();
     }
@@ -35,6 +32,9 @@ public class PipePool : MonoBehaviour
 
     public void Reset()
     {
+        for (int i = _container.childCount - 1; i >= 0; i--)
+            Destroy(_container.GetChild(i).gameObject);
+
         _pool.Clear();
     }
 }

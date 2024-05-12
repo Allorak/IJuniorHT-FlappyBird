@@ -31,7 +31,6 @@ public class Bird : MonoBehaviour
 
     private void ProcessCollision(IInteractable interactable)
     {
-        Debug.Log(interactable.GetType());
         switch (interactable)
         {
             case Pipe or Ground:

@@ -15,6 +15,11 @@ public class PipeGenerator : MonoBehaviour
     {
         StartCoroutine(nameof(GeneratePipes));
     }
+    
+    public void Reset()
+    {
+        _pool.Reset();
+    }
 
     private IEnumerator GeneratePipes()
     {
@@ -22,8 +27,8 @@ public class PipeGenerator : MonoBehaviour
 
         while (enabled)
         {
-            Spawn();
             yield return wait;
+            Spawn();
         }
     }
 
